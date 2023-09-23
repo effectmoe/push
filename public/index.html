@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCMプッシュ通知テスト</title>
+</head>
+
+<body>
+    <button id="pwa">プッシュ通知をテスト</button>
+
+    <script type="module">
+        // FCMのSDKインポート
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js";
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-messaging.js";
+
+        const firebaseConfig = {
+  apiKey: "AIzaSyBUzc81wDAh0lelLF7PWlWhDAKSlCcDgx8",
+  authDomain: "push-test-3c9f8.firebaseapp.com",
+  projectId: "push-test-3c9f8",
+  storageBucket: "push-test-3c9f8.appspot.com",
+  messagingSenderId: "893833820578",
+  appId: "1:893833820578:web:bbc7cd313af3bc0aee9afb",
+  measurementId: "G-N3HXQYQ4MH"
+};
+
+
+
+        // Firebaseを初期化
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        // FCMをテストする
+        function push_test() {
+            const messaging = getMessaging();
+
+            navigator.serviceWorker.register('firebase-messaging-sw.js').then(registration => {
+                getToken(messaging, {
+                    vapidKey: 'BBBnYGs0WA7KVVCEfvUJ02ejVi_hFkklhSa3LTyWdjrzQGmjtlXDgeKSEBRwUovtFDxY8XIQedbyUx8Bt204Rhk', // 証明書キー
+                    serviceWorkerRegistration: registration
+                }).then((currentToken) => {
+                    console.debug('token：' + currentToken);
+                    if (currentToken) {
+                        // ここにプッシュ通知を送信するコードを追加できます
+                    } else {
+                        console.log('登録トークンが利用できません。トークンを生成するための許可をリクエストしてください。');
+                    }
+                }).catch((err) => {
+                    console.log('トークンの取得中にエラーが発生しました。', err);
+                });
+            }).catch(err => {
+                console.log('ServiceWorkerの登録に失敗しました。', err);
+            });
+        }
+
+        document.getElementById('pwa').onclick = push_test;
+    </script>
+</body>
+
+</html>
