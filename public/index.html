@@ -65,8 +65,6 @@
 
 
     <!--サービスワーカーテスト用-->
-
-
 <script>
 const registerServiceWorker = async () => {
   if ("serviceWorker" in navigator) {
@@ -90,6 +88,35 @@ const registerServiceWorker = async () => {
 // …
 
 registerServiceWorker();
+</script>
+
+<!-- アプリケーションバッジ -->
+<button class="push">push</button>
+<button class="badge">badge</button>
+<button class="clear">clear</button>
+<button class="reload">reload</button>
+<p id="permission"></p>
+<script type="module">
+  document.querySelector('.push').addEventListener('click', requestPermission);
+  document.querySelector('.badge').addEventListener('click', () => {
+    navigator.setAppBadge(0 | Math.random() * 9 + 1);
+  });
+  document.querySelector('.clear').addEventListener('click', () => {
+    navigator.setAppBadge(0);
+  });
+  document.querySelector('.reload').addEventListener('click', () => {
+    location.reload();
+  });
+
+  function requestPermission() {
+    if (!window.Notification) {
+      return;
+    }
+
+    Notification.requestPermission().then((permission) => {
+      document.getElementById('permission').innerText = permission;
+    });
+  }
 </script>
 
 </body>
