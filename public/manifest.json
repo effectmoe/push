@@ -1,0 +1,24 @@
+{
+    "name": "佐用 貴歩",
+    "short_name": "佐用 貴歩",
+    "description": "佐用貴歩のデジタル名刺",
+    "start_url": "/",
+    "display": "standalone",
+    "lang": "ja",
+    "dir": "auto",
+    "orientation": "any",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}
