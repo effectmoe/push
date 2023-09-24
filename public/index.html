@@ -93,7 +93,7 @@ registerServiceWorker();
 <!-- アプリケーションバッジ -->
 <button class="push">push</button>
 <button class="badge">badge</button>
-<button class="clear">clear</button>
+
 <button class="reload">reload</button>
 <p id="permission"></p>
 <script type="module">
@@ -101,9 +101,7 @@ registerServiceWorker();
   document.querySelector('.badge').addEventListener('click', () => {
     navigator.setAppBadge(0 | Math.random() * 9 + 1);
   });
-  document.querySelector('.clear').addEventListener('click', () => {
-    navigator.setAppBadge(0);
-  });
+
   document.querySelector('.reload').addEventListener('click', () => {
     location.reload();
   });
@@ -117,6 +115,11 @@ registerServiceWorker();
       document.getElementById('permission').innerText = permission;
     });
   }
+</script>
+
+<!-- バッジの自動クリア -->
+<script>
+    navigator.setAppBadge(0);
 </script>
 
 </body>
